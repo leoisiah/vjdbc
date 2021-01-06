@@ -154,14 +154,11 @@ public class RowPacket implements Externalizable {
                     _flattenedColumnsValues[internalIndex].setDouble(_rowCount, rs.getDouble(i));
                     break;
 
-                case Types.DATE:
-                    _flattenedColumnsValues[internalIndex].setObject(_rowCount, rs.getDate(i));
-                    break;
-
                 case Types.TIME:
                     _flattenedColumnsValues[internalIndex].setObject(_rowCount, rs.getTime(i));
                     break;
 
+                case Types.DATE:
                 case Types.TIMESTAMP:
                     _flattenedColumnsValues[internalIndex].setObject(_rowCount, rs.getTimestamp(i));
                     break;
@@ -177,7 +174,11 @@ public class RowPacket implements Externalizable {
                     break;
 
                 case Types.CLOB:
-                    _flattenedColumnsValues[internalIndex].setObject(_rowCount, new SerialClob(rs.getClob(i)));
+                    if(rs.getClob(i)!=null) {
+                        _flattenedColumnsValues[internalIndex].setObject(_rowCount, new SerialClob(rs.getClob(i)));
+                    } else {
+                        _flattenedColumnsValues[internalIndex].setObject(_rowCount, null);
+                    }
                     break;
 
                 case Types.BLOB:

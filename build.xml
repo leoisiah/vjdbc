@@ -67,6 +67,9 @@
             <fileset dir="${tmpdir}/class">
                 <include name="de/simplicit/vjdbc/server/rmi/*_Stub.class"/>
             </fileset>
+        	<fileset dir=".">
+        		<include name="NOTICE.txt"/>
+        	</fileset>
         </jar>
         <!-- ... now the server JAR -->
         <jar basedir="${tmpdir}/class" destfile="lib/vjdbc_server.jar"

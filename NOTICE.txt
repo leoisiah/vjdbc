@@ -1,0 +1,4 @@
+This product is derived from version 1.6.5 of vjdbc library. See http://vjdbc.sourceforge.net/ .
+
+- Changes are made to RowPacket and StreamingResultSet classes to correctly get the time parts of Oracle DATE columns.
+- Change is made to RowPacket to handle NULL values in CLOB fields.

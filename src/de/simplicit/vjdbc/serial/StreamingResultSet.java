@@ -607,10 +607,9 @@ public class StreamingResultSet implements ResultSet, Externalizable {
         columnIndex--;
         if(preGetCheckNull(columnIndex)) {
             switch(_columnTypes[columnIndex]) {
-                case Types.DATE:
-                    return (Date)_actualRow[columnIndex];
                 case Types.TIME:
                     return getCleanDate((((Time)_actualRow[columnIndex]).getTime()));
+                case Types.DATE:
                 case Types.TIMESTAMP:
                     return getCleanDate(((Timestamp)_actualRow[columnIndex]).getTime());
             }
@@ -628,8 +627,6 @@ public class StreamingResultSet implements ResultSet, Externalizable {
                 case Types.TIME:
                     return (Time)_actualRow[columnIndex];
                 case Types.DATE:
-                    Date date = ((Date)_actualRow[columnIndex]);
-                    return getCleanTime(date.getTime());
                 case Types.TIMESTAMP:
                     Timestamp timestamp = ((Timestamp)_actualRow[columnIndex]);
                     return getCleanTime(timestamp.getTime());
@@ -648,7 +645,6 @@ public class StreamingResultSet implements ResultSet, Externalizable {
                 case Types.TIME:
                     return new Timestamp(((Time)_actualRow[columnIndex]).getTime());
                 case Types.DATE:
-                    return new Timestamp(((Date)_actualRow[columnIndex]).getTime());
                 case Types.TIMESTAMP:
                     return ((Timestamp)_actualRow[columnIndex]);
             }
