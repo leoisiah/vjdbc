@@ -7,6 +7,9 @@ OPT = Optimization
 CLN = Cleanup/Refactoring
 OTH = Other
 
+Release 1.6.5+
+See NOTICE.txt for changes after version 1.6.5
+
 Release 1.6.5 (05 Feb 2007)
 ---------------------------
 * FEA: ServletCommandSink now searches the whole classpath for the configuration resource

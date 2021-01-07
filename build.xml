@@ -22,6 +22,7 @@
         <mkdir dir="${tmpdir}/war"/>
         <mkdir dir="${tmpdir}/applet"/>
         <mkdir dir="${tmpdir}/website"/>
+    	<mkdir dir="${tmpdir}/META-INF"/>
     </target>
     
     <target name="clean">
@@ -56,8 +57,15 @@
         <delete file="lib/vjdbc.jar" failonerror="false"/>
         <delete file="lib/vjdbc_server.jar" failonerror="false"/>
         <copy todir="${tmpdir}/class/de/simplicit/vjdbc" file="conf/log4j.properties"/>
+    	
+    	<manifest file="${tmpdir}/META-INF/MANIFEST.MF">
+	    	<attribute name="Implementation-Version" value="${version.major}.${version.minor}.${version.build}"/>
+    	</manifest>    	
+    	<copy todir="${tmpdir}/META-INF" file="lgpl.txt"/>
+    	<copy todir="${tmpdir}/META-INF" file="NOTICE.txt"/>
+    	
         <!-- First bundle the client JAR -->
-        <jar destfile="lib/vjdbc.jar">
+        <jar destfile="lib/vjdbc.jar" manifest="${tmpdir}/META-INF/MANIFEST.MF">
             <fileset dir="${tmpdir}/class">
                 <include name="de/simplicit/vjdbc/**"/>
                 <exclude name="de/simplicit/vjdbc/server/**"/>
@@ -67,8 +75,8 @@
             <fileset dir="${tmpdir}/class">
                 <include name="de/simplicit/vjdbc/server/rmi/*_Stub.class"/>
             </fileset>
-        	<fileset dir=".">
-        		<include name="NOTICE.txt"/>
+        	<fileset dir="${tmpdir}">
+        		<include name="META-INF/*"/>
         	</fileset>
         </jar>
         <!-- ... now the server JAR -->
